@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.ZulinMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Zulin">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="fangyuanxinxiid" property="fangyuanxinxiid" jdbcType="INTEGER"/>
+        <result column="fangyuanbianhao" property="fangyuanbianhao" jdbcType="VARCHAR"/>
+        <result column="fangyuanleixing" property="fangyuanleixing" jdbcType="VARCHAR"/>
+        <result column="jichuzujin" property="jichuzujin" jdbcType="VARCHAR"/>
+        <result column="iszf" property="iszf" jdbcType="VARCHAR"/>
+        <result column="zulinbianhao" property="zulinbianhao" jdbcType="VARCHAR"/>
+        <result column="kehuxingming" property="kehuxingming" jdbcType="VARCHAR"/>
+        <result column="lianxifangshi" property="lianxifangshi" jdbcType="VARCHAR"/>
+        <result column="zhuangtai" property="zhuangtai" jdbcType="VARCHAR"/>
+        <result column="kehu" property="kehu" jdbcType="VARCHAR"/>
+        <result column="beizhu" property="beizhu" jdbcType="VARCHAR"/>
+        <result column="zulinriqi" property="zulinriqi" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="table">zulin</sql>
+    <sql id="Base_Column_List">id,fangyuanxinxiid,fangyuanbianhao,fangyuanleixing,jichuzujin,iszf,zulinbianhao,kehuxingming,lianxifangshi,zhuangtai,kehu,beizhu,zulinriqi</sql>
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM <include refid="table"/> <where>  ${where}  </where>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Zulin">
+        SELECT * FROM <include refid="table"/> WHERE  id = #{id}
+    </select>
+    <delete id="delete" parameterType="com.spring.entity.Zulin">
+        DELETE FROM <include refid="table"/> WHERE  id = #{id}
+    </delete>
+    <update id="update" parameterType="com.spring.entity.Zulin">
+        UPDATE <include refid="table"/> <set>
+             <if test="fangyuanxinxiid != null">
+                fangyuanxinxiid = #{fangyuanxinxiid},
+            </if>
+             <if test="fangyuanbianhao != null">
+                fangyuanbianhao = #{fangyuanbianhao},
+            </if>
+             <if test="fangyuanleixing != null">
+                fangyuanleixing = #{fangyuanleixing},
+            </if>
+             <if test="jichuzujin != null">
+                jichuzujin = #{jichuzujin},
+            </if>
+             <if test="iszf != null">
+                iszf = #{iszf},
+            </if>
+             <if test="zulinbianhao != null">
+                zulinbianhao = #{zulinbianhao},
+            </if>
+             <if test="kehuxingming != null">
+                kehuxingming = #{kehuxingming},
+            </if>
+             <if test="lianxifangshi != null">
+                lianxifangshi = #{lianxifangshi},
+            </if>
+             <if test="zhuangtai != null">
+                zhuangtai = #{zhuangtai},
+            </if>
+             <if test="kehu != null">
+                kehu = #{kehu},
+            </if>
+             <if test="beizhu != null">
+                beizhu = #{beizhu},
+            </if>
+             <if test="zulinriqi != null">
+                zulinriqi = #{zulinriqi},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Zulin">
+        INSERT INTO
+        <include refid="table"/>
+        (fangyuanxinxiid,fangyuanbianhao,fangyuanleixing,jichuzujin,iszf,zulinbianhao,kehuxingming,lianxifangshi,zhuangtai,kehu,beizhu,zulinriqi)
+        VALUES
+        (#{fangyuanxinxiid},#{fangyuanbianhao},#{fangyuanleixing},#{jichuzujin},#{iszf},#{zulinbianhao},#{kehuxingming},#{lianxifangshi},#{zhuangtai},#{kehu},#{beizhu},#{zulinriqi})
+    </insert>
+</mapper>

@@ -1,0 +1,1 @@
+<html><head></head><body><script>location.href="login.do"</script></body></html>

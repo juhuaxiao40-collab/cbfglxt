@@ -1,0 +1,91 @@
+<%@ page language="java" import="com.spring.util.*,java.util.*,com.spring.util.QueryUtil.*" pageEncoding="UTF-8" %>
+ <%@ taglib prefix="ssm" uri="http://ssm" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><%@ include file="head.jsp" %>
+<script src="js/jquery.validate.js"></script>
+
+
+<div style="padding: 10px" class="admin-content">
+    <div class="card">
+        <div class="card-header">
+         服务查询 
+        </div>
+        <div class="card-body">            <div class="pa10 bg-warning">
+                <form class="form-inline" id="formSearch" action="?">                   <div class="form-group">
+                      服务类型
+<select class="form-control class_fuwuleixing" name="fuwuleixing" id="fuwuleixing" data-value="${param.fuwuleixing !=null ? param.fuwuleixing :''}"  style="width:250px;" >
+<option value>请选择服务类型</option>
+<option value="保洁服务">保洁服务</option>
+<option value="维修报修">维修报修</option>
+<option value=""></option>
+</select>
+<script>$(".class_fuwuleixing").val($(".class_fuwuleixing").attr("data-value"))</script>
+
+</div>
+                   <div class="form-group">
+                      服务状态
+<select class="form-control class_fuwuzhuangtai" name="fuwuzhuangtai" id="fuwuzhuangtai" data-value="${param.fuwuzhuangtai !=null ? param.fuwuzhuangtai :''}"  style="width:250px;" >
+<option value>请选择服务状态</option>
+<option value="处理中">处理中</option>
+<option value="已完成">已完成</option>
+</select>
+<script>$(".class_fuwuzhuangtai").val($(".class_fuwuzhuangtai").attr("data-value"))</script>
+
+</div>
+                   <div class="form-group">
+                      添加人
+                        <input type="text" class="form-control" placeholder="输入添加人关键词" style="width:300px;"     id="tianjiaren" name="tianjiaren" value="${param.tianjiaren !=null ? param.tianjiaren :''}"/>
+</div>
+
+<button type="submit" class="btn btn-default">搜索</button>
+                    <!--form标签结束-->
+                </form>
+            </div>            <div class="list-table">
+                <table width="100%" border="1" class="table">
+                    <thead>
+                        <tr align="center">
+                            <th width="60" data-field="item">#</th>
+                            <th >服务编号</th>
+                            <th >客户姓名</th>
+                            <th >服务类型</th>
+                            <th >服务状态</th>
+                            <th >添加人</th>
+                            <th >添加时间</th>
+
+                            <th width="220" data-field="handler">处理</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:set var="i" value="0"/><c:forEach items="${list}" var="map"><c:set var="i" value="${i+1}"/>
+                    <tr id="${map.id}" pid="">
+                        <td width="30" align="center"><label>${i}</label></td>
+                            <td>${map.fuwubianhao}
+</td>
+                            <td>${map.kehuxingming}
+</td>
+                            <td>${map.fuwuleixing}</td>
+                            <td>${map.fuwuzhuangtai}</td>
+                            <td>${map.tianjiaren}
+</td>
+                            <td>${Info.subStr(map.tianjiashijian,19,'')}
+</td>
+
+                        <td align="center">
+<a href="fuwu_detail.do?id=${map.id}" class="btn btn-default" >详情</a>
+<a href="fuwu_updt.do?id=${map.id}" class="btn btn-default" >编辑</a>
+<a href="fuwudelete.do?id=${map.id}" onclick="return confirm('确定要删除？')" class="btn btn-default" >删除</a>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+                    </table>
+            </div> 
+            <%@ include file="/page.jsp" %>
+        </div>
+
+
+    </div>
+
+
+</div>
+<%@ include file="foot.jsp" %>

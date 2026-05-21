@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.JieyueMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Jieyue">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="zulinid" property="zulinid" jdbcType="INTEGER"/>
+        <result column="zulinbianhao" property="zulinbianhao" jdbcType="VARCHAR"/>
+        <result column="kehuxingming" property="kehuxingming" jdbcType="VARCHAR"/>
+        <result column="lianxifangshi" property="lianxifangshi" jdbcType="VARCHAR"/>
+        <result column="fangyuanbianhao" property="fangyuanbianhao" jdbcType="VARCHAR"/>
+        <result column="yuanyin" property="yuanyin" jdbcType="VARCHAR"/>
+        <result column="jieyueren" property="jieyueren" jdbcType="VARCHAR"/>
+        <result column="jieyueshijian" property="jieyueshijian" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="table">jieyue</sql>
+    <sql id="Base_Column_List">id,zulinid,zulinbianhao,kehuxingming,lianxifangshi,fangyuanbianhao,yuanyin,jieyueren,jieyueshijian</sql>
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM <include refid="table"/> <where>  ${where}  </where>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Jieyue">
+        SELECT * FROM <include refid="table"/> WHERE  id = #{id}
+    </select>
+    <delete id="delete" parameterType="com.spring.entity.Jieyue">
+        DELETE FROM <include refid="table"/> WHERE  id = #{id}
+    </delete>
+    <update id="update" parameterType="com.spring.entity.Jieyue">
+        UPDATE <include refid="table"/> <set>
+             <if test="zulinid != null">
+                zulinid = #{zulinid},
+            </if>
+             <if test="zulinbianhao != null">
+                zulinbianhao = #{zulinbianhao},
+            </if>
+             <if test="kehuxingming != null">
+                kehuxingming = #{kehuxingming},
+            </if>
+             <if test="lianxifangshi != null">
+                lianxifangshi = #{lianxifangshi},
+            </if>
+             <if test="fangyuanbianhao != null">
+                fangyuanbianhao = #{fangyuanbianhao},
+            </if>
+             <if test="yuanyin != null">
+                yuanyin = #{yuanyin},
+            </if>
+             <if test="jieyueren != null">
+                jieyueren = #{jieyueren},
+            </if>
+             <if test="jieyueshijian != null">
+                jieyueshijian = #{jieyueshijian},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Jieyue">
+        INSERT INTO
+        <include refid="table"/>
+        (zulinid,zulinbianhao,kehuxingming,lianxifangshi,fangyuanbianhao,yuanyin,jieyueren,jieyueshijian)
+        VALUES
+        (#{zulinid},#{zulinbianhao},#{kehuxingming},#{lianxifangshi},#{fangyuanbianhao},#{yuanyin},#{jieyueren},#{jieyueshijian})
+    </insert>
+</mapper>

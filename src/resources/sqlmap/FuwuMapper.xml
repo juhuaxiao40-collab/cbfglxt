@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.FuwuMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Fuwu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="zulinid" property="zulinid" jdbcType="INTEGER"/>
+        <result column="fuwubianhao" property="fuwubianhao" jdbcType="VARCHAR"/>
+        <result column="kehuxingming" property="kehuxingming" jdbcType="VARCHAR"/>
+        <result column="lianxifangshi" property="lianxifangshi" jdbcType="VARCHAR"/>
+        <result column="fuwuleixing" property="fuwuleixing" jdbcType="VARCHAR"/>
+        <result column="fuwuzhuangtai" property="fuwuzhuangtai" jdbcType="VARCHAR"/>
+        <result column="fuwuneirong" property="fuwuneirong" jdbcType="VARCHAR"/>
+        <result column="fuwuliuyan" property="fuwuliuyan" jdbcType="VARCHAR"/>
+        <result column="tianjiaren" property="tianjiaren" jdbcType="VARCHAR"/>
+        <result column="tianjiashijian" property="tianjiashijian" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="table">fuwu</sql>
+    <sql id="Base_Column_List">id,zulinid,fuwubianhao,kehuxingming,lianxifangshi,fuwuleixing,fuwuzhuangtai,fuwuneirong,fuwuliuyan,tianjiaren,tianjiashijian</sql>
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM <include refid="table"/> <where>  ${where}  </where>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Fuwu">
+        SELECT * FROM <include refid="table"/> WHERE  id = #{id}
+    </select>
+    <delete id="delete" parameterType="com.spring.entity.Fuwu">
+        DELETE FROM <include refid="table"/> WHERE  id = #{id}
+    </delete>
+    <update id="update" parameterType="com.spring.entity.Fuwu">
+        UPDATE <include refid="table"/> <set>
+             <if test="zulinid != null">
+                zulinid = #{zulinid},
+            </if>
+             <if test="fuwubianhao != null">
+                fuwubianhao = #{fuwubianhao},
+            </if>
+             <if test="kehuxingming != null">
+                kehuxingming = #{kehuxingming},
+            </if>
+             <if test="lianxifangshi != null">
+                lianxifangshi = #{lianxifangshi},
+            </if>
+             <if test="fuwuleixing != null">
+                fuwuleixing = #{fuwuleixing},
+            </if>
+             <if test="fuwuzhuangtai != null">
+                fuwuzhuangtai = #{fuwuzhuangtai},
+            </if>
+             <if test="fuwuneirong != null">
+                fuwuneirong = #{fuwuneirong},
+            </if>
+             <if test="fuwuliuyan != null">
+                fuwuliuyan = #{fuwuliuyan},
+            </if>
+             <if test="tianjiaren != null">
+                tianjiaren = #{tianjiaren},
+            </if>
+             <if test="tianjiashijian != null">
+                tianjiashijian = #{tianjiashijian},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Fuwu">
+        INSERT INTO
+        <include refid="table"/>
+        (zulinid,fuwubianhao,kehuxingming,lianxifangshi,fuwuleixing,fuwuzhuangtai,fuwuneirong,fuwuliuyan,tianjiaren,tianjiashijian)
+        VALUES
+        (#{zulinid},#{fuwubianhao},#{kehuxingming},#{lianxifangshi},#{fuwuleixing},#{fuwuzhuangtai},#{fuwuneirong},#{fuwuliuyan},#{tianjiaren},#{tianjiashijian})
+    </insert>
+</mapper>

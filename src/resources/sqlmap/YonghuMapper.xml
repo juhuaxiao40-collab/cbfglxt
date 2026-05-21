@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.YonghuMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Yonghu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="cx" property="cx" jdbcType="VARCHAR"/>
+        <result column="yonghuming" property="yonghuming" jdbcType="VARCHAR"/>
+        <result column="mima" property="mima" jdbcType="VARCHAR"/>
+        <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+        <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
+        <result column="shoujihao" property="shoujihao" jdbcType="VARCHAR"/>
+        <result column="touxiang" property="touxiang" jdbcType="VARCHAR"/>
+        <result column="youxiang" property="youxiang" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <sql id="table">yonghu</sql>
+    <sql id="Base_Column_List">id,cx,yonghuming,mima,xingming,xingbie,shoujihao,youxiang,touxiang</sql>
+    <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Yonghu">
+        SELECT <include refid="Base_Column_List"/> FROM <include refid="table"/> WHERE yonghuming = #{yonghuming} AND mima = #{mima}
+    </select>
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM <include refid="table"/> <where>  ${where}  </where>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Yonghu">
+        SELECT * FROM <include refid="table"/> WHERE  id = #{id}
+    </select>
+    <delete id="delete" parameterType="com.spring.entity.Yonghu">
+        DELETE FROM <include refid="table"/> WHERE  id = #{id}
+    </delete>
+    <update id="update" parameterType="com.spring.entity.Yonghu">
+        UPDATE <include refid="table"/> <set>
+             <if test="cx != null">
+                cx = #{cx},
+            </if>
+             <if test="yonghuming != null">
+                yonghuming = #{yonghuming},
+            </if>
+             <if test="mima != null">
+                mima = #{mima},
+            </if>
+             <if test="xingming != null">
+                xingming = #{xingming},
+            </if>
+             <if test="xingbie != null">
+                xingbie = #{xingbie},
+            </if>
+             <if test="shoujihao != null">
+                shoujihao = #{shoujihao},
+            </if>
+        <if test="youxiang != null">
+            youxiang = #{youxiang},
+        </if>
+        <if test="touxiang != null">
+            touxiang = #{touxiang},
+        </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Yonghu">
+        INSERT INTO
+        <include refid="table"/>
+        (cx,yonghuming,mima,xingming,xingbie,shoujihao,youxiang,touxiang)
+        VALUES
+        (#{cx},#{yonghuming},#{mima},#{xingming},#{xingbie},#{shoujihao},#{youxiang},#{touxiang})
+    </insert>
+</mapper>
