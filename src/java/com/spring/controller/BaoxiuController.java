@@ -120,22 +120,32 @@ public class BaoxiuController extends BaseController {
         String zulinbianhao = Request.get("zulinbianhao");
         post.setZulinbianhao(zulinbianhao);
         
-        String fangyuanbianhao = "";
-        SelectExample zulinExample = new SelectExample();
-        zulinExample.setWhere(" zulinbianhao = '" + zulinbianhao + "' ");
-        List<Zulin> zulinList = zulinMapper.selectAll(zulinExample);
-        if (!zulinList.isEmpty()) {
-            fangyuanbianhao = zulinList.get(0).getFangyuanbianhao();
+        String fangyuanbianhao = Request.get("fangyuanbianhao");
+        String fangyuanmingchen = Request.get("fangyuanmingchen");
+        
+        if (fangyuanbianhao == null || fangyuanbianhao.isEmpty()) {
+            SelectExample zulinExample = new SelectExample();
+            zulinExample.setWhere(" zulinbianhao = '" + zulinbianhao + "' ");
+            List<Zulin> zulinList = zulinMapper.selectAll(zulinExample);
+            if (!zulinList.isEmpty()) {
+                fangyuanbianhao = zulinList.get(0).getFangyuanbianhao();
+                post.setFangyuanbianhao(fangyuanbianhao);
+            }
+        } else {
             post.setFangyuanbianhao(fangyuanbianhao);
         }
         
-        SelectExample fangyuanExample = new SelectExample();
-        fangyuanExample.setWhere(" fangyuanbianhao = '" + fangyuanbianhao + "' ");
-        List<Fangyuanxinxi> fangyuanList = fangyuanxinxiMapper.selectAll(fangyuanExample);
-        if (!fangyuanList.isEmpty()) {
-            post.setFangyuanmingchen(fangyuanList.get(0).getFangyuanmingchen());
+        if (fangyuanmingchen == null || fangyuanmingchen.isEmpty()) {
+            SelectExample fangyuanExample = new SelectExample();
+            fangyuanExample.setWhere(" fangyuanbianhao = '" + fangyuanbianhao + "' ");
+            List<Fangyuanxinxi> fangyuanList = fangyuanxinxiMapper.selectAll(fangyuanExample);
+            if (!fangyuanList.isEmpty()) {
+                post.setFangyuanmingchen(fangyuanList.get(0).getFangyuanmingchen());
+            } else {
+                post.setFangyuanmingchen("");
+            }
         } else {
-            post.setFangyuanmingchen("");
+            post.setFangyuanmingchen(fangyuanmingchen);
         }
         
         post.setKehuxingming(Request.get("kehuxingming"));

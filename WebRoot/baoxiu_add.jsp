@@ -12,25 +12,36 @@
             添加报修申请
         </div>
         <div class="card-body">
+            <c:if test="${param.fangyuanmingchen != null && !param.fangyuanmingchen.isEmpty()}">
+                <div class="alert alert-info">
+                    <strong>报修房源信息</strong><br>
+                    房源编号：${param.fangyuanbianhao}<br>
+                    房源名称：${param.fangyuanmingchen}
+                </div>
+            </c:if>
+
             <form action="baoxiuinsert.do" method="post" id="form">
+                <input type="hidden" name="fangyuanbianhao" value="${param.fangyuanbianhao}">
+                <input type="hidden" name="fangyuanmingchen" value="${param.fangyuanmingchen}">
+
                 <div class="form-group">
                     <label>选择租赁</label>
                     <select class="form-control" name="zulinbianhao" id="zulinbianhao">
                         <option value="">请选择租赁</option>
                         <c:forEach items="${zulinList}" var="item">
-                            <option value="${item.zulinbianhao}">${item.fangyuanbianhao} - ${item.kehuxingming}</option>
+                            <option value="${item.zulinbianhao}" ${param.zulinid == item.id ? 'selected' : ''}>${item.fangyuanbianhao} - ${item.kehuxingming}</option>
                         </c:forEach>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>客户姓名</label>
-                    <input type="text" class="form-control" name="kehuxingming" id="kehuxingming" placeholder="请输入客户姓名">
+                    <input type="text" class="form-control" name="kehuxingming" id="kehuxingming" value="${sessionScope.xingming}" placeholder="请输入客户姓名">
                 </div>
 
                 <div class="form-group">
                     <label>联系方式</label>
-                    <input type="text" class="form-control" name="lianxifangshi" id="lianxifangshi" placeholder="请输入联系方式">
+                    <input type="text" class="form-control" name="lianxifangshi" id="lianxifangshi" value="${sessionScope.shoujihao}" placeholder="请输入联系方式">
                 </div>
 
                 <div class="form-group">

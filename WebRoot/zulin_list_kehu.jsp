@@ -117,10 +117,9 @@
                             <td align="center">
 
                                 <a href="feiyong_list_kehu.do?zulinid=${map.id}" class="btn btn-default">查询费用</a>
-
-                                <a href="jieyue_list.do?zulinid=${map.id}" class="btn btn-default">查询解约</a>
-
-                                <a href="fuwu_list.do?zulinid=${map.id}" class="btn btn-default">查询服务</a>
+                                <c:if test="${map.zhuangtai == '已生效'}">
+                                    <a href="baoxiu_add.do?zulinid=${map.id}&fangyuanbianhao=${map.fangyuanbianhao}&fangyuanmingchen=${map.fangyuanmingchen}" class="btn btn-warning">发起报修</a>
+                                </c:if>
                                 <a href="zulin_detail.do?id=${map.id}" class="btn btn-default">详情</a>
 
                             </td>
