@@ -58,19 +58,19 @@
                 </li>
 				
                 <li>
-                    <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 解约管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 看房申请 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
 						
-                        <li><a target="ymain" href="jieyue_list.do">解约查询</a></li>
+                        <li><a target="ymain" href="kanfang_list.do">看房申请查询</a></li>
 						 
                     </ul>
                 </li>
 				
                 <li>
-                    <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 服务管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 报修管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
 						
-                        <li><a target="ymain" href="fuwu_list.do">服务查询</a></li>
+                        <li><a target="ymain" href="baoxiu_list.do">报修查询</a></li>
 						 
                     </ul>
                 </li>

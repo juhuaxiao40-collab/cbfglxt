@@ -64,23 +64,26 @@ public class UserController extends BaseController {
         if (request.getParameter("a") != null && !pagerandom.equals(random)) {
             return showError("验证码不正确");
         }
-                if (cx.equals("用户")) {
-            Yonghu user = yonghuService.login(username ,pwd);
-            if(user == null){
-                return showError("用户名或密码错误");
-            }
-            session.setAttribute("id" , user.getId());
-            session.setAttribute("username" , user.getYonghuming());
-            session.setAttribute("cx" , cx);
-            session.setAttribute("login" , cx);
-            session.setAttribute("cx", user.getCx());
-            session.setAttribute("yonghuming", user.getYonghuming());
-            session.setAttribute("mima", user.getMima());
-            session.setAttribute("xingming", user.getXingming());
-            session.setAttribute("xingbie", user.getXingbie());
-            session.setAttribute("shoujihao", user.getShoujihao());
-            session.setAttribute("touxiang", user.getTouxiang());
+        
+        Yonghu user = yonghuService.login(username, pwd);
+        if (user == null) {
+            return showError("用户名或密码错误");
         }
+        
+        if (!user.getCx().equals(cx)) {
+            return showError("账号类型不匹配");
+        }
+        
+        session.setAttribute("id", user.getId());
+        session.setAttribute("username", user.getYonghuming());
+        session.setAttribute("cx", cx);
+        session.setAttribute("login", cx);
+        session.setAttribute("yonghuming", user.getYonghuming());
+        session.setAttribute("mima", user.getMima());
+        session.setAttribute("xingming", user.getXingming());
+        session.setAttribute("xingbie", user.getXingbie());
+        session.setAttribute("shoujihao", user.getShoujihao());
+        session.setAttribute("touxiang", user.getTouxiang());
 
 
         String referer = request.getParameter("referer");
@@ -158,14 +161,12 @@ public class UserController extends BaseController {
         if (!newPwd.equals(newPwd2)) {
             return showError("两次密码不一致");
         }
-                if (cx.equals("用户")) {
-            Yonghu user = yonghuService.login(username , oldPassword);
-            if(user == null){
-                return showError("原密码不正确");
-            }
-            yonghuService.updatePassword(user.getId() , newPwd);
+        
+        Yonghu user = yonghuService.login(username, oldPassword);
+        if (user == null) {
+            return showError("原密码不正确");
         }
-
+        yonghuService.updatePassword(user.getId(), newPwd);
 
         return showSuccess("修改密码成功", "./mod.do");
     }

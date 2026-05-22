@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.KanfangMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Kanfang">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="fangyuanbianhao" property="fangyuanbianhao" jdbcType="VARCHAR"/>
+        <result column="fangyuanmingchen" property="fangyuanmingchen" jdbcType="VARCHAR"/>
+        <result column="kehuxingming" property="kehuxingming" jdbcType="VARCHAR"/>
+        <result column="lianxifangshi" property="lianxifangshi" jdbcType="VARCHAR"/>
+        <result column="kanfangshijian" property="kanfangshijian" jdbcType="VARCHAR"/>
+        <result column="zhuangtai" property="zhuangtai" jdbcType="VARCHAR"/>
+        <result column="beizhu" property="beizhu" jdbcType="VARCHAR"/>
+        <result column="kehu" property="kehu" jdbcType="VARCHAR"/>
+        <result column="tianjiashijian" property="tianjiashijian" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table">kanfang</sql>
+    <sql id="Base_Column_List">id,fangyuanbianhao,fangyuanmingchen,kehuxingming,lianxifangshi,kanfangshijian,zhuangtai,beizhu,kehu,tianjiashijian</sql>
+    <select id="count" resultType="Integer" parameterType="com.spring.util.SelectExample">
+        SELECT COUNT(*) FROM <include refid="table"/> <where>  ${where}  </where>
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM <include refid="table"/> <where>  ${where}  </where> <if test="order != null">  ORDER BY ${order} </if>
+    </select>
+    <select id="find" resultMap="BaseResultMap" parameterType="com.spring.entity.Kanfang">
+        SELECT * FROM <include refid="table"/> WHERE  id = #{id}
+    </select>
+    <delete id="delete" parameterType="com.spring.entity.Kanfang">
+        DELETE FROM <include refid="table"/> WHERE  id = #{id}
+    </delete>
+    <update id="update" parameterType="com.spring.entity.Kanfang">
+        UPDATE <include refid="table"/> <set>
+             <if test="fangyuanbianhao != null">fangyuanbianhao = #{fangyuanbianhao},</if>
+             <if test="fangyuanmingchen != null">fangyuanmingchen = #{fangyuanmingchen},</if>
+             <if test="kehuxingming != null">kehuxingming = #{kehuxingming},</if>
+             <if test="lianxifangshi != null">lianxifangshi = #{lianxifangshi},</if>
+             <if test="kanfangshijian != null">kanfangshijian = #{kanfangshijian},</if>
+             <if test="zhuangtai != null">zhuangtai = #{zhuangtai},</if>
+             <if test="beizhu != null">beizhu = #{beizhu},</if>
+             <if test="kehu != null">kehu = #{kehu},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.entity.Kanfang">
+        INSERT INTO
+        <include refid="table"/>
+        (fangyuanbianhao,fangyuanmingchen,kehuxingming,lianxifangshi,kanfangshijian,zhuangtai,beizhu,kehu,tianjiashijian)
+        VALUES
+        (#{fangyuanbianhao},#{fangyuanmingchen},#{kehuxingming},#{lianxifangshi},#{kanfangshijian},#{zhuangtai},#{beizhu},#{kehu},NOW())
+    </insert>
+</mapper>

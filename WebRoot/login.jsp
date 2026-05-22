@@ -69,12 +69,9 @@
 								</div><br>
 								<div class="form-group">
 									<select id="sys" name="cx" class="form-control">
-										
-											<option value="用户">用户</option>
-										
-
+										<option value="管理员">管理员</option>
+										<option value="用户">用户</option>
 									</select>
-
 								</div>
 
 
