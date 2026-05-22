@@ -217,4 +217,31 @@ public class FangyuanxinxiController extends BaseController {
         return showSuccess("删除成功", request.getHeader("referer"));//弹出删除成功，并跳回上一页
     }
 
+    /**
+     * 用户端房源列表页
+     */
+    @RequestMapping("/fangyuanxinxi_list_kehu")
+    public String listKehu() {
+        if (!checkLogin()) {
+            return showError("请登录！", "./login.do");
+        }
+        String order = Request.get("order", "id");
+        String sort = Request.get("sort", "desc");
+
+        SelectExample example = new SelectExample();
+        String where = " fangyuanzhuangtai = '空闲' ";
+        where += getWhere();
+        example.setWhere(where);
+        example.setOrder(order + " " + sort);
+
+        int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
+        page = Math.max(1, page);
+        List<Fangyuanxinxi> list = service.selectPage(example, page, 12);
+        setAttribute("list", list);
+        setAttribute("orderby", order);
+        setAttribute("sort", sort);
+        setAttribute("where", where);
+        return "fangyuanxinxi_list_kehu";
+    }
+
 }

@@ -18,7 +18,7 @@
                     <select class="form-control" name="fangyuanbianhao" id="fangyuanbianhao">
                         <option value="">请选择房源</option>
                         <c:forEach items="${fangyuanList}" var="item">
-                            <option value="${item.fangyuanbianhao}">${item.fangyuanmingchen} - ${item.fangxing} - ${item.mianji}</option>
+                            <option value="${item.fangyuanbianhao}" ${param.fangyuanbianhao == item.fangyuanbianhao ? 'selected' : ''}>${item.fangyuanmingchen} - ${item.fangxing} - ${item.mianji}</option>
                         </c:forEach>
                     </select>
                 </div>
