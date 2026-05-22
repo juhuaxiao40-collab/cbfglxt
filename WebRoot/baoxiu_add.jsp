@@ -12,24 +12,24 @@
             添加报修申请
         </div>
         <div class="card-body">
-            <c:if test="${param.fangyuanmingchen != null && !param.fangyuanmingchen.isEmpty()}">
+            <c:if test="${fangyuanmingchen != null && !fangyuanmingchen.isEmpty()}">
                 <div class="alert alert-info">
                     <strong>报修房源信息</strong><br>
-                    房源编号：${param.fangyuanbianhao}<br>
-                    房源名称：${param.fangyuanmingchen}
+                    房源编号：${fangyuanbianhao}<br>
+                    房源名称：${fangyuanmingchen}
                 </div>
             </c:if>
 
             <form action="baoxiuinsert.do" method="post" id="form">
-                <input type="hidden" name="fangyuanbianhao" value="${param.fangyuanbianhao}">
-                <input type="hidden" name="fangyuanmingchen" value="${param.fangyuanmingchen}">
+                <input type="hidden" name="fangyuanbianhao" value="${fangyuanbianhao != null ? fangyuanbianhao : ''}">
+                <input type="hidden" name="fangyuanmingchen" value="${fangyuanmingchen != null ? fangyuanmingchen : ''}">
 
                 <div class="form-group">
                     <label>选择租赁</label>
                     <select class="form-control" name="zulinbianhao" id="zulinbianhao">
                         <option value="">请选择租赁</option>
                         <c:forEach items="${zulinList}" var="item">
-                            <option value="${item.zulinbianhao}" ${param.zulinid == item.id ? 'selected' : ''}>${item.fangyuanbianhao} - ${item.kehuxingming}</option>
+                            <option value="${item.zulinbianhao}" ${selectedZulinId == item.id ? 'selected' : ''}>${item.fangyuanbianhao} - ${item.kehuxingming}</option>
                         </c:forEach>
                     </select>
                 </div>

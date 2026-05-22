@@ -100,6 +100,16 @@ public class BaoxiuController extends BaseController {
         List<Zulin> zulinList = zulinMapper.selectAll(example);
         setAttribute("zulinList", zulinList);
         
+        int zulinid = Request.getInt("zulinid");
+        if (zulinid > 0) {
+            Zulin zulin = zulinMapper.find(zulinid);
+            if (zulin != null) {
+                setAttribute("selectedZulinId", zulinid);
+                setAttribute("fangyuanbianhao", zulin.getFangyuanbianhao());
+                setAttribute("fangyuanmingchen", zulin.getFangyuanmingchen());
+            }
+        }
+        
         return "baoxiu_add";
     }
 
