@@ -135,6 +135,48 @@ public class ZulinController extends BaseController {
         return "zulin_add";
     }
 
+    /**
+     * 用户端租赁申请页面
+     */
+    @RequestMapping("/zulin_add_kehu")
+    public String addKehu() {
+        if (!checkLogin()) {
+            return showError("请登录！", "./login.do");
+        }
+        int id = Request.getInt("id");
+        Fangyuanxinxi fangyuan = serviceRead.find(id);
+        setAttribute("fangyuan", fangyuan);
+        return "zulin_add_kehu";
+    }
+
+    /**
+     * 用户端租赁申请提交
+     */
+    @RequestMapping("/zulin_insert_kehu")
+    public String insertKehu() {
+        if (!checkLogin()) {
+            return showError("请登录！", "./login.do");
+        }
+        
+        Zulin post = new Zulin();
+        post.setFangyuanxinxiid(Request.getInt("fangyuanxinxiid"));
+        post.setFangyuanbianhao(Request.get("fangyuanbianhao"));
+        post.setFangyuanleixing(Request.get("fangyuanleixing"));
+        post.setJichuzujin(Request.get("jichuzujin"));
+        post.setIszf("否");
+        post.setZulinbianhao("ZL" + System.currentTimeMillis());
+        post.setKehuxingming(Request.get("kehuxingming"));
+        post.setLianxifangshi(Request.get("lianxifangshi"));
+        post.setZhuangtai("待支付");
+        post.setKehu(session.getAttribute("username").toString());
+        post.setBeizhu(Request.get("beizhu"));
+        post.setZulinriqi(Info.getDateStr());
+        
+        service.insert(post);
+        
+        return showSuccess("租赁申请成功，请等待支付！", "./zulin_list_kehu.do");
+    }
+
     /*
     * 租赁接口
     * */

@@ -9,7 +9,7 @@
 <div style="padding: 10px" class="admin-content">
     <div class="card">
         <div class="card-header">
-            房源列表
+            可租房源列表
         </div>
         <div class="card-body">
             <div class="pa10 bg-warning">
@@ -53,7 +53,7 @@
                         <th>面积</th>
                         <th>楼层</th>
                         <th>基础租金</th>
-                        <th width="180" data-field="handler">操作</th>
+                        <th width="280" data-field="handler">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,7 +68,8 @@
                             <td>${map.jichuzujin} 元/月</td>
                             <td align="center">
                                 <a href="fangyuanxinxi_detail.do?id=${map.id}" class="btn btn-default">查看详情</a>
-                                <a href="kanfang_add.do?fangyuanbianhao=${map.fangyuanbianhao}" class="btn btn-primary">申请看房</a>
+                                <a href="kanfang_add.do?fangyuanbianhao=${map.fangyuanbianhao}" class="btn btn-info">预约看房</a>
+                                <a href="zulin_add_kehu.do?id=${map.id}" class="btn btn-primary">立即租赁</a>
                             </td>
                         </tr>
                     </c:forEach>

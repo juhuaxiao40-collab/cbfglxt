@@ -21,7 +21,9 @@
                     <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 租赁管理 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
 						
-                        <li><a target="ymain" href="zulin_list_kehu.do">租赁查询</a></li>
+                        <li><a target="ymain" href="fangyuanxinxi_list_kehu.do">我要租房</a></li>
+						 
+                        <li><a target="ymain" href="zulin_list_kehu.do">我的租赁</a></li>
 						 
                     </ul>
                 </li>
@@ -39,8 +41,6 @@
                     <a class="sidebar-sub-toggle"><i class="ti-layout"></i> 看房申请 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
 						
-                        <li><a target="ymain" href="fangyuanxinxi_list_kehu.do">房源列表</a></li>
-						 
                         <li><a target="ymain" href="kanfang_list_kehu.do">我的看房申请</a></li>
 						 
                     </ul>
